@@ -35,18 +35,37 @@ colors = {
 app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.Div([
         html.Div([
-            html.H1(
-            children='Memphis Zip Code Data',
-            style={
-                'textAlign': 'center',
-                'color': colors['text'],
-                'padding-top': 40
-                }
-            ),
-            html.Div(children='Visualizing U.S. Census Bureau datapoints for various Memphis zip codes', style={
-            'textAlign': 'center',
-            'color': colors['text'],
-            'padding-bottom': 40
+            html.H1(children='Memphis Zip Code Data',
+                style={
+                    'textAlign': 'center',
+                    'font-family':'Verdana',
+                    'color': colors['text'],
+                    'padding-top': 20
+                }),
+            html.P(children='Visualizing the Digital Divide in Memphis, TN', 
+                style={
+                    'textAlign': 'center',
+                    'font-size': 24,
+                    'font-family':'Verdana',
+                    'color': colors['text'],
+                    'padding-bottom': 10
+            }), 
+            html.P(['The data below was gathered from the U.S. Census Bureau table B28002, "PRESENCE AND TYPES OF INTERNET SUBSCRIPTIONS IN HOUSEHOLD".',html.Br(),'The data was filtered by zip code to view data for all 34 zip codes in the Memphis area.',html.Br(),'The complete derived datatable can be viewed below.'],
+                style={
+                    'margin-left': 100,
+                    'margin-right': 100,
+                    'font-size': 12,
+                    'font-family':'Verdana',
+                    'textAlign': 'center',
+                    'color': colors['text']
+            }),
+            html.Label([html.A('Click here to view the data', href='https://data.census.gov/cedsci/table?q=b28002&tid=ACSDT1Y2018.B28002&vintage=2018&hidePreview=true&moe=false', target="_blank")],
+                style={
+                    'font-size': 10,
+                    'font-family':'Verdana',
+                    'textAlign': 'center',
+                    'color': colors['text'],
+                    'padding-bottom': 20
             })
         ], className='row'),
 ###############################################################      
@@ -59,6 +78,10 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             ),
         html.Div(id='dd-output-container')]),
 ###############################################################        
+        html.Div(children='', style={
+                'padding': 15
+            }),
+###############################################################
         html.Div([
             html.Div([
                 dcc.Graph(
@@ -104,6 +127,21 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
             html.Div(children='', style={
                 'padding': 250
             }),
+###############################################################
+            html.Footer(children='Created by Zach Cornelison', style={
+                'backgroundColor': 'black',
+                'color': 'white',
+                'font-size': 8,
+                'width': '100%',
+                'textAlign': 'center'
+            }),
+            html.Footer([html.A('Github', href='https://github.com/zachcornelison', target="_blank")], style={
+                'backgroundColor': 'black',
+                'color': 'white',
+                'font-size': 8,
+                'width': '100%',
+                'textAlign': 'center'
+            })
 ###############################################################  
         ], className='row')
     ], className='ten columns offset-by-one'),    
@@ -131,19 +169,15 @@ def update_image_src(selector):
         ],
         'layout': {
             'title': 'Percent of Homes Lacking Broadband Internet',
-            'xaxis' : dict(
-                title='Area Name',
-                titlefont=dict(
-                family='Courier New, monospace',
-                size=20,
-                color='#7f7f7f'
-            )),
+            "titlefont": {
+                "size": 20,
+                'fontWeight': 'bold'
+            },
             'yaxis' : dict(
                 title='Percent Without Broadband',
                 titlefont=dict(
-                family='Helvetica, monospace',
-                size=18,
-                color='#7f7f7f'
+                family='Verdana',
+                size=16
             ))
         }
     }
@@ -163,20 +197,16 @@ def update_image_src(selector):
                   for area_name, income, zip_code in filtered_data.to_numpy()
         ],
         'layout': {
-            'title': 'Mean Home Income Past 12 Months',
-            'xaxis' : dict(
-                title='Area Name',
-                titlefont=dict(
-                family='Courier New, monospace',
-                size=20,
-                color='#7f7f7f'
-            )),
+            'title': 'Mean Income Last 12 Months',
+            "titlefont": {
+                "size": 20,
+                'fontWeight': 'bold'
+            },
             'yaxis' : dict(
                 title='Income',
                 titlefont=dict(
-                family='Helvetica, monospace',
-                size=20,
-                color='#7f7f7f'
+                family='Verdana',
+                size=16
             ))
         }
     }
